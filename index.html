@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club de plein air de la Côte-Nord</title>
+  <style>
+    :root {
+      --yellow-circle: #ffe26e;
+      --river: #c7ece5;
+      --dark-trees: #211c1d;
+      --mountain-foreground: #1d2b29;
+      --mountain-middle: #588a82;
+      --mountain-back: #669f96;
+      --text-main: #211c1d;
+      --bg-light: #f7faf9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background:
+        linear-gradient(to bottom, rgba(29, 43, 41, 0.75), rgba(29, 43, 41, 0.9)),
+        url("mountains.svg") center / cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      /* Adjust last field to control opacity (.60) */
+      background: rgba(247, 250, 249, 0.60); 
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+      /* A bit more blur to keep text readable over the bg */
+      backdrop-filter: blur(5px);
+    }
+
+    .card-main {
+      display: flex;
+      flex-direction: column;
+      padding: 1.75rem 1.5rem 1.5rem;
+      gap: 1.5rem;
+    }
+
+    .logo-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+      /* box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25); */
+    }
+
+    .content-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      color: #000000;
+    }
+
+    .tagline {
+      font-weight: 500;
+      color: var(--mountain-middle);
+    }
+
+    .intro {
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    details {
+      margin-top: 0.6rem;
+      border-left: 3px solid var(--mountain-middle);
+      padding-left: 0.6rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    details p {
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.75rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.93rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+                  background-color 0.12s ease-out, color 0.12s ease-out;
+      white-space: nowrap;
+    }
+
+    .cta-primary {
+      background: var(--yellow-circle);
+      color: #000000;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+      background: #ffe980;
+    }
+
+    .cta-secondary {
+      background: rgba(199, 236, 229, 0.9);
+      color: var(--mountain-foreground);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .cta-secondary:hover {
+      background: #d7f3ed;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.78rem;
+      color: rgba(247, 250, 249, 0.95);
+      background: linear-gradient(
+        to right,
+        rgba(33, 28, 29, 0.95),
+        rgba(29, 43, 41, 0.98)
+      );
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(247, 250, 249, 0.5);
+    }
+
+    .footer-links a:hover {
+      border-bottom-style: solid;
+    }
+
+    @media (min-width: 720px) {
+      .card-main {
+        flex-direction: row;
+        padding: 2.2rem 2rem 1.8rem;
+      }
+
+      .logo-col {
+        flex: 0 0 34%;
+        padding-right: 1.5rem;
+      }
+
+      .content-col {
+        flex: 1;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .intro {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+
+      .card-main {
+        padding: 1.4rem 1.2rem 1.2rem;
+      }
+
+      .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cta {
+        width: 100%;
+      }
+
+      .card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <main class="card" aria-labelledby="site-title">
+      <section class="card-main">
+        <div class="logo-col">
+          <img src="logo.png" alt="Logo du Club de plein air de la Côte-Nord" class="logo">
+        </div>
+
+        <div class="content-col">
+          <header>
+            <h1 id="site-title">Club de plein air de la Côte-Nord</h1>
+            <p class="tagline">OSBL dédié à la nature
+              et à la découverte des trésors de la Côte-Nord par le biais de l'activité physique.</p>
+          </header>
+
+          <section class="intro">
+
+            <p>
+            Le Club rassemble les adeptes de plein air et d'aventure en offrant des sorties encadrées tout au long de l'année,
+            que ce soit pour une première expérience ou repousser ses limites:
+            randonnées, excursions saisonnières et initiation à l'escalade de roche ou de glace, souvent organisées en partenariat avec d'autres organisations locales.
+            </p>
+            <br>
+            <p>
+            Animé·e·s par le désir de faire découvrir et préserver nos milieux naturels, nous développons, entretenons et mettons en valeur
+            des sites de pratique en collaboration avec les acteurs engagés envers le territoire nord-côtier.
+
+            </p>
+
+            <details>
+              <summary>Bref…</summary>
+              <p>
+              Nous sommes un groupe de bénévoles bien motivé·e·s à prendre soin de notre territoire… et toujours partant·e·s pour aller jouer dehors, beau temps, mauvais temps!
+              </p>
+            </details>
+          </section>
+
+          <nav class="cta-row" aria-label="Liens importants">
+            <a class="cta cta-primary"
+               href="https://www.zeffy.com/fr-CA/ticketing/adhesions-membres-individuelles-2">
+              Devenir membre du Club
+            </a>
+            <a class="cta cta-secondary" href="https://facebook.com/pleinaircotenord">
+              Nous suivre sur Facebook
+            </a>
+            <a class="cta cta-secondary" href="mailto:info@pleinaircotenord.ca">
+              Écrire à info@pleinaircotenord.ca
+            </a>
+          </nav>
+        </div>
+      </section>
+
+      <footer class="card-footer">
+        <div>© 2026 Club de plein air de la Côte-Nord</div>
+        <div class="footer-links">
+          <a href="mailto:info@pleinaircotenord.ca">Contact</a>
+          <a href="https://facebook.com/pleinaircotenord">Facebook</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
